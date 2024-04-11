@@ -6,7 +6,8 @@ This script deals with logging and redaction of sensitive user data.
 import re
 from typing import List
 
-# Regular expression patterns for extracting and replacing sensitive information
+# Regular expression patterns for extracting and
+# replacing sensitive information
 patterns = {
     'extract': lambda x, y: r'(?P<field>{})=[^{}]*'.format('|'.join(x), y),
     'replace': lambda x: r'\g<field>={}'.format(x),
@@ -16,7 +17,8 @@ patterns = {
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """
     Filter sensitive data in a message.
 
