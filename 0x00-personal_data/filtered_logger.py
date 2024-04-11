@@ -6,6 +6,8 @@ This script deals with logging and redaction of sensitive user data.
 import re
 from typing import List
 import logging
+import os
+import mysql.connector
 
 # Regular expression patterns for extracting and
 # replacing sensitive information
@@ -50,6 +52,27 @@ def get_logger() -> logging.Logger:
     logger.propagate = False
     logger.addHandler(stream_handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """
+    Connect to the database.
+
+    Returns:
+        mysql.connector.connection.MySQLConnection: Database connection object.
+    """
+    db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "")
+    db_user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    db_pwd = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    connection = mysql.connector.connect(
+        host=db_host,
+        port=3306,
+        user=db_user,
+        password=db_pwd,
+        database=db_name,
+    )
+    return connection
 
 
 class RedactingFormatter(logging.Formatter):
