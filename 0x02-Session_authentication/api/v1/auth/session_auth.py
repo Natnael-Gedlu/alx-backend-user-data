@@ -11,7 +11,8 @@ from models.user import User
 
 
 class SessionAuth(Auth):
-    """ Implement Session Authorization protocol methods
+    """
+    Implement Session Authorization protocol methods
     """
     user_id_by_session_id = {}
 
