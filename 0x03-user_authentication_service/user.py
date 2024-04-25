@@ -8,6 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 class User(Base):
     """
     Represents a user with attributes such as email, hashed password,
